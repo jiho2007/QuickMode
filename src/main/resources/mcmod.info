@@ -1,0 +1,16 @@
+[
+{
+  "modid": "QuickMode",
+  "name": "QuickMode",
+  "description": "Makes New Short Command to Play Hypixel Games Faster",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "http://hypixel.net/members/2164821",
+  "updateUrl": "",
+  "authorList": ["jiho2007"],
+  "credits": "(C) 2019 jiho2007. All rights reserved.",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
