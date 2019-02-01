@@ -1,4 +1,4 @@
-ac:ModeAC.txt
+ar:ModeAC.txt
 bw:ModeBW.txt
 my:ModeMY.txt
 sw:ModeSW.txt
