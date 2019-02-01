@@ -11,18 +11,29 @@ import net.minecraft.command.ICommandSender;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.ChatComponentText;
-
 import java.util.Arrays;
 import java.util.List;
+import java.util.Scanner;
+import java.net.URL;
+import java.io.IOException;
 
-public abstract class Command implements ICommand {
+public class Command implements ICommand {
 	
-	String usage = EnumChatFormatting.RED + "Usage: /" + this.getCommandName() + " <mode>";
-	
+	String usage;
 	String colormsg = ColorCode.get("6") + "QuickMode" + ColorCode.get("b") + " :: " + ColorCode.get("3") + this.usage; 
+	String name;
+	String file;
+	
+	public Command(String name, String file) {
+		this.name = name;
+		this.file = file;
+		usage = EnumChatFormatting.RED + "Usage: /" + this.name + " <mode>";
+	}
 	
     @Override
-    public abstract String getCommandName();
+    public String getCommandName() {
+		return this.name;
+	}
 
     @Override
     public String getCommandUsage(ICommandSender sender) {
@@ -35,7 +46,30 @@ public abstract class Command implements ICommand {
     }
 
     @Override
-    public abstract void processCommand(ICommandSender sender, String[] args) throws CommandException;
+    public void processCommand(ICommandSender sender, String[] args) throws CommandException {
+		Mode d = new Mode(this.file);
+		if(args.length == 1) {
+			String m = args[0];
+			if(d.have(m)) {
+				Minecraft.getMinecraft().thePlayer.sendChatMessage("/play " + d.get(m));
+				return;
+			} else if(m == "list" || m == "help") {
+				try {
+					URL f = new URL(
+						"https://raw.githubusercontent.com/jiho2007/QuickMode/master/mode/" + this.file
+					);
+					Scanner s = new Scanner(f.openStream());
+					while(s.hasNext()) {
+						String[] q = s.nextLine().split(":");
+						String colorlist = ColorCode.get("2") + q[0] + ColorCode.get("b") + " : " + ColorCode.get("4") + q[1];
+						Minecraft.getMinecraft().thePlayer.addChatComponentMessage(new ChatComponentText(colorlist));
+					}
+				} catch(IOException e) {}
+				return;
+			}
+		}
+		Minecraft.getMinecraft().thePlayer.addChatComponentMessage(new ChatComponentText(this.colormsg));
+	}
 
     @Override
     public boolean canCommandSenderUseCommand(ICommandSender sender) {
@@ -56,16 +90,5 @@ public abstract class Command implements ICommand {
     public int compareTo(ICommand o) {
         return 0;
     }
-	
-	public void process(String[] args, Mode d) {
-		if(args.length == 1) {
-			String m = args[0];
-			if(d.haveMode(m)) {
-				Minecraft.getMinecraft().thePlayer.sendChatMessage("/play " + d.getMode(m));
-				return;
-			}
-		}
-		Minecraft.getMinecraft().thePlayer.addChatComponentMessage(new ChatComponentText(this.colormsg));
-	}
 	
 }
