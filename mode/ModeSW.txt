@@ -1,0 +1,10 @@
+1:solo_normal
+2:teams_normal
+3:solo_insane
+4:teams_insane
+5:mega_normal
+6:mega_doubles
+7:solo_insane_rush
+8:teams_insane_rush
+9:solo_insane_hunters_vs_beasts
+0:ranked_normal
