@@ -20,7 +20,7 @@ import java.io.IOException;
 public class Command implements ICommand {
 	
 	String usage;
-	String colormsg = ColorCode.get("6") + "QuickMode" + ColorCode.get("b") + " :: " + ColorCode.get("3") + this.usage; 
+	String colormsg;
 	String name;
 	String file;
 	
@@ -28,6 +28,7 @@ public class Command implements ICommand {
 		this.name = name;
 		this.file = file;
 		usage = EnumChatFormatting.RED + "Usage: /" + this.name + " <mode>";
+		colormsg = ColorCode.get("6") + "QuickMode" + ColorCode.get("b") + " :: " + ColorCode.get("3") + this.usage; 
 	}
 	
     @Override
