@@ -8,3 +8,7 @@
 8:bedwars_four_four_ultimate
 9:bedwars_capture
 0:bedwars_castle
+one:bedwars_eight_one
+two:bedwars_eight_two
+three:bedwars_four_three
+four:bedwars_four_four
